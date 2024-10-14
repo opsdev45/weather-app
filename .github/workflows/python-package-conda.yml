@@ -33,7 +33,7 @@ jobs:
       with:
         repository: opsdev45/argocd
         path: deploy
-
+    #
     - name: Change image tag in deployment
       run: |
         sed -i 's|image: devops45of/app:.*|image: devops45of/app:${{ github.sha }}|g' deploy/deployment.yaml
