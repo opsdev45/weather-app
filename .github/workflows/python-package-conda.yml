@@ -30,7 +30,7 @@ jobs:
       run: |
           curl -X POST \
             -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GIT_TOKEN }}" \
             https://api.github.com/repos/opsdev45/argocd/dispatches \
             -d '{"event_type": "trigger_deployment", "client_payload": {"sha": "${{ github.sha }}"}}'
 
