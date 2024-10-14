@@ -32,10 +32,11 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: opsdev45/argocd
+        path: repo
     #
     - name: Change image tag in deployment
       run: |
-        sed -i 's|image: devops45of/app:.*|image: devops45of/app:${{ github.sha }}|g' deploy/deployment.yaml
+        sed -i 's|image: devops45of/app:.*|image: devops45of/app:${{ github.sha }}|g' repo/deploy/deployment.yaml
 
     - name: Commit changes
       run: |
