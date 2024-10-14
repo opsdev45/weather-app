@@ -32,7 +32,6 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: opsdev45/argocd
-        path: deploy
     #
     - name: Change image tag in deployment
       run: |
