@@ -1,5 +1,4 @@
-name: Python Package using Conda
-
+name: dev pipeline
 on: [push]
 
 jobs:
@@ -28,22 +27,7 @@ jobs:
     - name: Push Docker image to DockerHub
       run: docker push devops45of/app --all-tags
 
-    - name: Checkout deployment repo
-      uses: actions/checkout@v4
-      with:
-        repository: opsdev45/argocd
-        path: repo
-    #
-    - name: Change image tag in deployment
-      run: |
-        sed -i 's|image: devops45of/app:.*|image: devops45of/app:${{ github.sha }}|g' repo/deploy/deployment.yaml
-
-    - name: Commit changes
-      run: |
-        cd deploy
-        git add deploy/deployment.yaml
-        git commit -m "Update image tag to ${{ github.sha }}"
-        git push
+    
 
       
     
