@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>location</title>
+</head>
+<body>
+    <h1>Temperature Data for {{ location }}</h1>
+    {% if msg%}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Temp morning</th>
+                    <th>Temp evening</th>
+                    <th>Humidity</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    {% for key, values in msg.items() %}
+
+                        {% if key == day %}
+                            <td bgcolor="yellow">{{ key }}</td>
+                        {% else %}
+                            <td>{{ key }}</td>
+                        {% endif %}
+
+                            {% for key, val in values.items() %}
+                                <td>{{ val }}</td>
+                            {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <form action="#" method="POST">
+        <button type="submit">send to DB</button>
+    </form>
+</body>
+</html>

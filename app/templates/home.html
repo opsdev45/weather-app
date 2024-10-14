@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: {{ color }};
+        }
+    </style>
+    <title>change title weather app </title>
+</head>
+<body>
+
+    <form action="#" method="POST">
+        <input type="text" name="location" placeholder="search weather location...">
+        <button type="submit">submit</button>
+        {% if err %}
+            <font color="red">{{ err }}</font>
+        {% endif %}
+    </form>
+
+    <a class="btn btn-success" href="{{url_for('download')}}">Download</a>
+    <a class="btn btn-success" href="{{url_for('history')}}">history</a>
+
+
+</body>
+</html>

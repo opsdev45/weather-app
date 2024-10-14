@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history</title>
+</head>
+<body>
+    <h1>All the history</h1>
+    {% if msg%}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>location</th>
+                </tr>
+            </thead>
+           <tbody>
+                {% for val in msg %}
+                <tr>
+                    <td>{{ val.time }}</td>
+                    <td>{{ val.location }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    {% endif %}
+
+    <a class="btn btn-success" href="{{url_for('history_d')}}">Download-history</a>
+
+</body>
+</html>
