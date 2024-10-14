@@ -18,5 +18,4 @@ urllib3==2.2.2
 werkzeug==3.0.3
 zipp==3.19.2
 gunicorn
-boto3
 prometheus-client
