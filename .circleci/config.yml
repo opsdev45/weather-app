@@ -36,6 +36,7 @@ jobs:
           name: Run container  
           command: |
             docker run -p 8000:8000 -d devops45of/app:1.$CIRCLE_BUILD_NUM 
+            docker ps
             sleep 20
             docker ps 
       - run:
