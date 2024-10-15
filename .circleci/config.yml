@@ -10,7 +10,6 @@ jobs:
     working_directory: ~/project/app
     steps:
       - checkout
-      - python/install-packages
       - run:
           name: Run pylint
           command: pylint --output-format=parseable --disable=E401 --fail-under=5 app/app.py app/wsgi.py app/modules/backend.py
