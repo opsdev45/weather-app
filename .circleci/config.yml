@@ -31,7 +31,8 @@ jobs:
             docker push registry.gitlab.com/opsdev45/container:1.$CIRCLE_BUILD_NUM
       - run:
           name: send message to discord
-          command: curl -X POST -H "Content-Type: application/json" -d '{"content": "New Docker image pushed: registry.gitlab.com/opsdev45/container:1.'"${CIRCLE_BUILD_NUM}"'"}' $DISCORD_WEBHOOK_URL
+          command: > 
+            curl -X POST -H "Content-Type: application/json" -d '{"content": "New Docker image pushed: registry.gitlab.com/opsdev45/container:1.'"${CIRCLE_BUILD_NUM}"'"}' $DISCORD_WEBHOOK_URL
 
       - run:
           name: Run container  
