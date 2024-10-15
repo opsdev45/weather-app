@@ -12,10 +12,7 @@ jobs:
       - checkout
       - run:
           name: Install pylint
-          command: |
-            python -m venv venv
-            . venv/bin/activate
-            pip install pytest requests pylint 
+          command: pip install pylint  
       - run:
           name: Run pylint
           command: |
@@ -42,8 +39,8 @@ jobs:
           command: docker run -p 8000:8000 -d devops45of/app:1.$CIRCLE_BUILD_NUM 
       - run:
           name: Test container  
-          command: | 
-            . venv/bin/activate
+          command: |
+            pip install requests pytest
             python test.py
   
   # test_docker:
