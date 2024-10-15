@@ -12,10 +12,15 @@ jobs:
       - checkout
       - run:
           name: Install pylint
-          command: pip install pylint requests pytest
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install pytest requests pylint 
       - run:
           name: Run pylint
-          command: pylint --output-format=parseable --disable=E401 --fail-under=5 app/app.py app/wsgi.py app/modules/backend.py
+          command: |
+            . venv/bin/activate
+            pylint --output-format=parseable --disable=E401 --fail-under=5 app/app.py app/wsgi.py app/modules/backend.py
 
   build_docker:
     docker:
@@ -37,7 +42,9 @@ jobs:
           command: docker run -p 8000:8000 -d devops45of/app:1.$CIRCLE_BUILD_NUM 
       - run:
           name: Test container  
-          command: python test.py
+          command: | 
+            . venv/bin/activate
+            python test.py
   
   # test_docker:
   #   docker:
