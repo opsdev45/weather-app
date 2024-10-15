@@ -32,19 +32,25 @@ jobs:
             docker login -u "$DOCKER_USER" -p Qwerasdf132 
             docker build -t devops45of/app:1.$CIRCLE_BUILD_NUM .
             docker push devops45of/app:1.$CIRCLE_BUILD_NUM
-  
-  test_docker:
-    docker:
-      - image: docker:20.10
-    steps:
-      - checkout
-      - setup_remote_docker
       - run:
           name: Run container  
           command: docker run -p 8000:8000 -d devops45of/app:1.$CIRCLE_BUILD_NUM 
       - run:
           name: Test container  
           command: python test.py
+  
+  # test_docker:
+  #   docker:
+  #     - image: docker:20.10
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker
+  #     - run:
+  #         name: Run container  
+  #         command: docker run -p 8000:8000 -d devops45of/app:1.$CIRCLE_BUILD_NUM 
+  #     - run:
+  #         name: Test container  
+  #         command: python test.py
 
 workflows:
   build-and-test:
@@ -53,6 +59,6 @@ workflows:
       - build_docker:
           requires:
             - test-python
-      - test_docker:
-          requires:
-            - build_docker
+      # - test_docker:
+      #     requires:
+      #       - build_docker
