@@ -1,8 +1,7 @@
-# This config was automatically generated from your source code
-# Stacks detected: cicd:github-actions:.github/workflows,deps:python:app
 version: 2.1
 orbs:
   python: circleci/python@2
+
 jobs:
   test-python:
     # Install dependencies and run tests
@@ -14,22 +13,23 @@ jobs:
           path: ~/
       - python/install-packages
       - run:
-          name: Run tests
+          name: Run pylint
           command: pylint --output-format=parseable --disable=E401 --fail-under=5 app/app.py app/wsgi.py app/modules/backend.py
-      # - store_test_results:
-      #     path: junit.xml
+
   build_docker:
     docker:
       - image: docker:20.10
-      environment:
-        DOCKER_USER: devops45of
-        DOCKER_PASS: ${{ secrets.DOCKER_PASSWD }}
     steps:
       - checkout
-      - build_docker:
-      - run: | 
-        dokcer build -t devops45of/app:1.$CIRCLE_BUILD_NUM -t devops45of/app:latest .
-        docker push devops45of/app:1.$CIRCLE_BUILD_NUM 
+      - setup_remote_docker
+      - run:
+          name: Build and Push Docker Image
+          environment:
+            DOCKER_USER: devops45of
+            DOCKER_PASS: ${{ secrets.DOCKER_PASSWD }}
+          command: |
+            docker build -t devops45of/app:1.$CIRCLE_BUILD_NUM .
+            docker push devops45of/app:1.$CIRCLE_BUILD_NUM
 
 workflows:
   build-and-test:
