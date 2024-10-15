@@ -11,7 +11,7 @@ jobs:
     working_directory: ~/project/app
     steps:
       - checkout:
-          path: ~/app
+          path: ~/
       - python/install-packages
       - run:
           name: Run tests
@@ -20,13 +20,12 @@ jobs:
       #     path: junit.xml
   build_docker:
     docker:
-      - image: cimg/go:1.17
+      - image: docker:20.10
       environment:
-      DOCKER_USER: devops45of
-      DOCKER_PASS: ${{ secrets.DOCKER_PASSWD }}
+        DOCKER_USER: devops45of
+        DOCKER_PASS: ${{ secrets.DOCKER_PASSWD }}
     steps:
-      - checkout:
-          path: ~/
+      - checkout
       - build_docker:
       - run: | 
         dokcer build -t devops45of/app:1.$CIRCLE_BUILD_NUM -t devops45of/app:latest .
