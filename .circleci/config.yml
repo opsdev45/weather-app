@@ -24,14 +24,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Build and Push Docker Image
-          environment:
-            DOCKER_USER: devops45of
-            DOCKER_PASS: ${{ secrets.DOCKER_PASSWD }}
+          name: Build and Push Docker Image 
           command: |
-            docker login -u "$DOCKER_USER" -p Qwerasdf132 
-            docker build -t devops45of/app:1.$CIRCLE_BUILD_NUM .
-            docker push devops45of/app:1.$CIRCLE_BUILD_NUM
+            docker login registry.gitlab.com -u opsdev45 -p $GITLAB_TOKEN
+            docker build -t registry.gitlab.com/opsdev45/container:1.$CIRCLE_BUILD_NUM .
+            docker push registry.gitlab.com/opsdev45/container:1.$CIRCLE_BUILD_NUM
       - run:
           name: Run container  
           command: |
