@@ -53,3 +53,6 @@ workflows:
       - build_docker:
           requires:
             - test-python
+      - test_docker:
+          requires:
+            - build_docker
