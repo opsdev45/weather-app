@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Install pylint
-          command: pip install pylint
+          command: pip install pylint requests pytest
       - run:
           name: Run pylint
           command: pylint --output-format=parseable --disable=E401 --fail-under=5 app/app.py app/wsgi.py app/modules/backend.py
@@ -32,6 +32,19 @@ jobs:
             docker login -u "$DOCKER_USER" -p Qwerasdf132 
             docker build -t devops45of/app:1.$CIRCLE_BUILD_NUM .
             docker push devops45of/app:1.$CIRCLE_BUILD_NUM
+  
+  test_docker:
+    docker:
+      - image: docker:20.10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run container  
+          command: docker run -p 8000:8000 -d devops45of/app:1.$CIRCLE_BUILD_NUM 
+      - run:
+          name: Test container  
+          command: python test.py
 
 workflows:
   build-and-test:
