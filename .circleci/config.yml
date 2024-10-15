@@ -4,7 +4,7 @@ orbs:
 
 jobs:
   test-python:
-    # Install dependencies and run tests
+    # run tests
     docker:
       - image: cimg/python:3.8-node
     working_directory: ~/project/app
