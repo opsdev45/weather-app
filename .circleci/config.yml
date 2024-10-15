@@ -11,6 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install pylint
+          command: pip install pylint
+      - run:
           name: Run pylint
           command: pylint --output-format=parseable --disable=E401 --fail-under=5 app/app.py app/wsgi.py app/modules/backend.py
 
