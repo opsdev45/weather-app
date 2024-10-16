@@ -50,6 +50,6 @@ workflows:
   build-and-test:
     jobs:
       - test-python
-      - build_docker:
-          requires:
-            - test-python
+      #- build_docker:
+       #   requires:
+        #    - test-python
